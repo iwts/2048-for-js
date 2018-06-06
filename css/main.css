@@ -1,0 +1,56 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+.outer{
+	width: 100%;
+}
+.inner{
+	margin: 0px auto;
+}
+
+.bg-color{
+	background: #faf8ef;
+}
+.inner-bg-color{
+	background: #bbada0;
+}
+.block-define-color{
+	background: #cdc1b4;
+}
+.block-2-color{
+	background: #eee4da;
+}
+.block-4-color{
+	background: #ede0c8;
+}
+.block-8-color{
+	background: #f2b179;
+}
+.block-16-color{
+	background: #f59563;
+}
+.block-32-color{
+	background: #f67c5f;
+}
+.block-64-color{
+	background: #f65e3b;
+}
+.block-128-color{
+	background: #edcf72;
+}
+// 开始有光晕
+.block-256-color{
+	background: #edcc61;
+}
+// 网上xjb找的颜色
+.block-512-color{
+	background: #9c0;
+}
+.block-1024-color{
+	background: #33b5e5;
+}
+.block-2048-color{
+	background: #09c;
+}
