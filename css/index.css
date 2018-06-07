@@ -20,4 +20,6 @@
 	float: left;
 	margin-left: 10px;
 	margin-top: 10px;
+	/*包含了数字属性*/
+	color: #f9f6f2; /*默认浅色#f9f6f2，深色是#f9f6f2*/
 }

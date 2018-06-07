@@ -22,7 +22,29 @@ var get_random = function(){
     return true;
 }
 
-// var updateBoardView = function(){}
+var updateBoardView = function(){
+    for(var i = 0;i < 4;i++){
+        for(var j = 0;j < 4;j++){
+            var now_block = $('#b-'+i+'-'+j);
+            now_block.removeClass();
+            now_block.addClass("con-block");
+            now_block.addClass("block-"+block_score[i][j]+"-color");
+            if(block_score[i][j] == 0){
+                now_block.text("");
+            }else{
+                now_block.text(block_score[i][j]);
+                if(block_score[i][j] >= 8){
+                    now_block.css("color","#f9f6f2");
+                }else{
+                    now_block.css("color","#776e65");
+                    if(block_score[i][j] < 256) continue;
+                    // 大于256的光晕特效
+
+                }
+            }
+        }
+    }
+}
 
 var init_map = function(){
     space = 0;
@@ -73,12 +95,47 @@ $(document).keydown(function(event){
     }
 });
 
-var can_move_left = function(){
-    
+var check = function(var x,var y){
+    if(x < 0 || x >= 4) return false;
+    if(y < 0 || y >= 4) return false;
+    return true;
 }
 
-var move_left = funciton(){
-    if(can_move_left() == false) return false;
+var can_move_left = function(){
+    for(var i = 0;i < 4;i++){
+        for(var j = 0;j < 4;j++){
+            if(block_score[i][j] == 0) continue;
+            if(check(i-1,j) == false) continue;
+            if(block_score[i-1][j] == 0) return true;
+            if(block_score[i][j] == block_score[i-1][j]) return true;
+        }
+    }
+    return false;
+}
 
-    
+var move_left = function(){
+    if(can_move_left() == false) return false;
+    for(var i = 0;i < 4;i++){
+        for(var j = 1;j < 4;j++){
+            if(block_score[i][j] == 0) continue;
+            var aims = -1;
+            for(var k = j-1;k >= 0;k--){
+                if(check(i,k) == false) continue;
+                if(block_score[i][k] == 0){
+                    aims = k;
+                    continue;
+                }
+                if(block_score[i][k] == block_score[i][j]){
+                    aims = k;
+                    break;
+                }else{
+                    break;
+                }
+            }
+            if(aims == -1) continue;
+            show_move_animate(i,j,aims);
+        }
+    }
+    setTimeout("updateBoardView",200);
+    return true;
 }
