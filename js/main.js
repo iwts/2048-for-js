@@ -1,5 +1,5 @@
 var block_score = new Array();
-var space;
+var space; // space值具体加减还没有写
 
 $(document).ready(function(e){
     new_game();
@@ -133,7 +133,7 @@ var move_left = function(){
                 }
             }
             if(aims == -1) continue;
-            show_move_animate(i,j,aims);
+            show_move_animate(i,j,i,j-aims);
         }
     }
     setTimeout("updateBoardView",200);
