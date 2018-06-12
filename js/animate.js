@@ -6,6 +6,7 @@ var show_animate = function(x,y,score){
     add_block.addClass("block-"+block_score[x][y]+"-color");
     add_block.css("height","0px");
     add_block.css("width","0px");
+    add_block.css("margin","0px");
     add_block.text(score);
     add_block.animate({
     	height: '100px',

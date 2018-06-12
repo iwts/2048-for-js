@@ -1,3 +1,6 @@
+// 每次删除块的没有写
+
+
 var block_score = new Array();
 var space; // space值具体加减还没有写
 
@@ -31,6 +34,7 @@ var updateBoardView = function(){
             show_block.append('<div class="con-block" id="flow-b-'+i+'-'+j+'"></div>');
             var add_block = $('#flow-b-'+i+'-'+j);
             add_block.addClass("block-"+block_score[i][j]+"-color");
+            add_block.css("margin","0px");
 
             if(block_score[i][j] == 0){
                 add_block.text("");
