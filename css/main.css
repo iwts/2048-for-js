@@ -3,6 +3,10 @@
 	padding: 0px;
 }
 
+a{
+	text-decoration: none;
+}
+
 .outer{
 	width: 100%;
 }

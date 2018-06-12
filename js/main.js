@@ -2,11 +2,13 @@ var block_score = new Array();
 var space; // space值具体加减还没有写
 
 $(document).ready(function(e){
-    new_game();
+    var begin = $('#begin');
+    begin.click(function(){
+        new_game();
+    });
 });
 
 var get_random = function(){
-    if(space == 16) return false;
     var random_x,random_y;
     do{
         random_x = parseInt(Math.floor(Math.random()*4));
@@ -18,25 +20,26 @@ var get_random = function(){
     }else{
         block_score[random_x][random_y] = 4;
     }
-    show_animate(random_x,random_y,block_score[random_x][random_y]);
+    //show_animate(random_x,random_y,block_score[random_x][random_y]);
     return true;
 }
 
 var updateBoardView = function(){
     for(var i = 0;i < 4;i++){
         for(var j = 0;j < 4;j++){
-            var now_block = $('#b-'+i+'-'+j);
-            now_block.removeClass();
-            now_block.addClass("con-block");
-            now_block.addClass("block-"+block_score[i][j]+"-color");
+            var show_block = $('#b-' + i + '-' + j);
+            show_block.append('<div class="con-block" id="flow-b-'+i+'-'+j+'"></div>');
+            var add_block = $('#flow-b-'+i+'-'+j);
+            add_block.addClass("block-"+block_score[i][j]+"-color");
+
             if(block_score[i][j] == 0){
-                now_block.text("");
+                add_block.text("");
             }else{
-                now_block.text(block_score[i][j]);
+                add_block.text(block_score[i][j]);
                 if(block_score[i][j] >= 8){
-                    now_block.css("color","#f9f6f2");
+                    add_block.css("color","#f9f6f2");
                 }else{
-                    now_block.css("color","#776e65");
+                    add_block.css("color","#776e65");
                     if(block_score[i][j] < 256) continue;
                     // 大于256的光晕特效
 
@@ -55,16 +58,18 @@ var init_map = function(){
         }
     }
 
-    //   updateBoardView();//通知前端对board二位数组进行设定。
+    
 
     get_random();
     get_random();
+
+    updateBoardView();//通知前端对board二位数组进行设定。
 }
 
 var new_game = function(){
     init_map();
 }
-
+/*
 var gameover = function(){
     // demo，以后要加更多选项
     alert("gameover");
@@ -95,7 +100,7 @@ $(document).keydown(function(event){
     }
 });
 
-var check = function(var x,var y){
+var check = function(x,y){
     if(x < 0 || x >= 4) return false;
     if(y < 0 || y >= 4) return false;
     return true;
@@ -138,4 +143,4 @@ var move_left = function(){
     }
     setTimeout("updateBoardView",200);
     return true;
-}
+}*/
