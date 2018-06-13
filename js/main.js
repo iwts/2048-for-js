@@ -23,7 +23,7 @@ var get_random = function(){
     }else{
         block_score[random_x][random_y] = 4;
     }
-    //show_animate(random_x,random_y,block_score[random_x][random_y]);
+    show_animate(random_x,random_y,block_score[random_x][random_y]);
     return true;
 }
 
@@ -31,6 +31,7 @@ var updateBoardView = function(){
     for(var i = 0;i < 4;i++){
         for(var j = 0;j < 4;j++){
             var show_block = $('#b-' + i + '-' + j);
+            show_block.empty();
             show_block.append('<div class="con-block" id="flow-b-'+i+'-'+j+'"></div>');
             var add_block = $('#flow-b-'+i+'-'+j);
             add_block.addClass("block-"+block_score[i][j]+"-color");
@@ -62,33 +63,31 @@ var init_map = function(){
         }
     }
 
-    
-
-    get_random();
-    get_random();
-
     updateBoardView();//通知前端对board二位数组进行设定。
+
+    get_random();
+    get_random();
 }
 
 var new_game = function(){
     init_map();
 }
-/*
+
 var gameover = function(){
     // demo，以后要加更多选项
     alert("gameover");
 }
 
 var move = function(){
-    var flag = get_random();
-    if(flag == false){
-        gameover();
-    }
+    // var flag = get_random();
+    // if(flag == false){
+    //     gameover();
+    // }
 }
 
 $(document).keydown(function(event){
     // 37-40分别为left、up、right、down
-    swtich(event.keyCode){
+    switch(event.keyCode){
         case 37: if(move_left() == true){
                     move();
                 }break;
@@ -104,22 +103,25 @@ $(document).keydown(function(event){
     }
 });
 
-var check = function(x,y){
-    if(x < 0 || x >= 4) return false;
-    if(y < 0 || y >= 4) return false;
-    return true;
-}
-
 var can_move_left = function(){
     for(var i = 0;i < 4;i++){
-        for(var j = 0;j < 4;j++){
+        for(var j = 1;j < 4;j++){
             if(block_score[i][j] == 0) continue;
-            if(check(i-1,j) == false) continue;
-            if(block_score[i-1][j] == 0) return true;
+            if(block_score[i][j-1] == 0) return true;
             if(block_score[i][j] == block_score[i-1][j]) return true;
         }
     }
     return false;
+}
+
+var can_move_right = function(){
+    
+}
+var can_move_up = function(){
+    
+}
+var can_move_down = function(){
+    
 }
 
 var move_left = function(){
@@ -129,7 +131,6 @@ var move_left = function(){
             if(block_score[i][j] == 0) continue;
             var aims = -1;
             for(var k = j-1;k >= 0;k--){
-                if(check(i,k) == false) continue;
                 if(block_score[i][k] == 0){
                     aims = k;
                     continue;
@@ -137,14 +138,28 @@ var move_left = function(){
                 if(block_score[i][k] == block_score[i][j]){
                     aims = k;
                     break;
-                }else{
-                    break;
                 }
+                break;
             }
             if(aims == -1) continue;
-            show_move_animate(i,j,i,j-aims);
+            block_score[i][aims] += block_score[i][j];
+            block_score[i][j] = 0;
+            //show_move_animate(i,j,i,j-aims);
         }
     }
-    setTimeout("updateBoardView",200);
+    setTimeout("updateBoardView()",200);
     return true;
-}*/
+}
+
+var move_right = function(){
+    alert("move right");
+    return true;
+}
+var move_up = function(){
+    alert("move up");
+    return true;
+}
+var move_down = function(){
+    alert("move down");
+    return true;
+}
