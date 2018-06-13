@@ -18,7 +18,7 @@ var get_random = function(){
         random_y = parseInt(Math.floor(Math.random()*4));
         if(block_score[random_x][random_y] == 0) break;
     }while(true);
-    if(Math.random() < 0.5){
+    if(Math.random() < 0.9){
         block_score[random_x][random_y] = 2;
     }else{
         block_score[random_x][random_y] = 4;
@@ -144,10 +144,11 @@ var move_left = function(){
             if(aims == -1) continue;
             block_score[i][aims] += block_score[i][j];
             block_score[i][j] = 0;
-            //show_move_animate(i,j,i,j-aims);
+            // 传参错误，aims计算错误，动画有问题，但是update时的计算是正确的。
+            show_move_animate(i,j,i,j-aims);
         }
     }
-    setTimeout("updateBoardView()",200);
+    //setTimeout("updateBoardView()",500);
     return true;
 }
 
