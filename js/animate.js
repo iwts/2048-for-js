@@ -26,13 +26,13 @@ top,left控制移动，距离临界：10px-340px，每阶段增加110px算法：
 	now_top = 110*i+10;
 */
 var show_move_animate = function(x,y,aims_x,aims_y){
-	alert(x+" "+y+" "+aims_x+" "+aims_y);
+	//alert(x+" "+y+" "+aims_x+" "+aims_y);
 	var now_block = $('#flow-b-' + x + '-' + y);
 	now_block.css("position","absolute");
 	now_block.css("top",110*x+10);
 	now_block.css("left",110*y+10);
 	now_block.animate({
-		top: 110*aims_x,
-		left: 110*aims_y
-	},500);
+		top: 110*aims_x+10,
+		left: 110*aims_y+10
+	},200);
 }

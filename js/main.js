@@ -144,11 +144,10 @@ var move_left = function(){
             if(aims == -1) continue;
             block_score[i][aims] += block_score[i][j];
             block_score[i][j] = 0;
-            // 传参错误，aims计算错误，动画有问题，但是update时的计算是正确的。
-            show_move_animate(i,j,i,j-aims);
+            show_move_animate(i,j,i,aims);
         }
     }
-    //setTimeout("updateBoardView()",500);
+    setTimeout("updateBoardView()",200);
     return true;
 }
 
