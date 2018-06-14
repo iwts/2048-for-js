@@ -108,20 +108,43 @@ var can_move_left = function(){
         for(var j = 1;j < 4;j++){
             if(block_score[i][j] == 0) continue;
             if(block_score[i][j-1] == 0) return true;
-            if(block_score[i][j] == block_score[i-1][j]) return true;
+            if(block_score[i][j] == block_score[i][j-1]) return true;
         }
     }
     return false;
 }
 
 var can_move_right = function(){
-    
+    for(var i = 0;i < 4;i++){
+        for(var j = 2;j >= 0;j--){
+            if(block_score[i][j] == 0) continue;
+            if(block_score[i][j+1] == 0) return true;
+            if(block_score[i][j] == block_score[i][j+1]) return true;
+        }
+    }
+    return false;
 }
+
 var can_move_up = function(){
-    
+    for(var j = 0;j < 4;j++){
+        for(var i = 1;i < 4;i++){
+            if(block_score[i][j] == 0) continue;
+            if(block_score[i-1][j] == 0) return true;
+            if(block_score[i][j] == block_score[i-1][j]) return true;
+        }
+    }
+    return false;
 }
+
 var can_move_down = function(){
-    
+    for(var j = 0;j < 4;j++){
+        for(var i = 2;i >= 0;i--){
+            if(block_score[i][j] == 0) continue;
+            if(block_score[i+1][j] == 0) return true;
+            if(block_score[i][j] == block_score[i+1][j]) return true;
+        }
+    }
+    return false;
 }
 
 var move_left = function(){
@@ -152,14 +175,87 @@ var move_left = function(){
 }
 
 var move_right = function(){
-    alert("move right");
+    if(can_move_right() == false) return false;
+    for(var i = 0;i < 4;i++){
+        // 不同方向判定顺序应该不同，这样保证逻辑正确
+        for(var j = 2;j >= 0;j--){
+            if(block_score[i][j] == 0) continue;
+            var aims = -1;
+            for(var k = j+1;k <= 3;k++){
+                if(block_score[i][k] == 0){
+                    aims = k;
+                    continue;
+                }
+                if(block_score[i][k] == block_score[i][j]){
+                    aims = k;
+                    break;
+                }
+                break;
+            }
+            if(aims == -1) continue;
+            block_score[i][aims] += block_score[i][j];
+            block_score[i][j] = 0;
+            show_move_animate(i,j,i,aims);
+        }
+    }
+    setTimeout("updateBoardView()",200);
     return true;
 }
+
 var move_up = function(){
-    alert("move up");
+    if(can_move_up() == false){
+        return false;
+    }
+    for(var j = 0;j < 4;j++){
+        for(var i = 1;i < 4;i++){
+            if(block_score[i][j] == 0) continue;
+            var aims = -1;
+            for(var k = i-1;k >= 0;k--){
+                if(block_score[k][j] == 0){
+                    aims = k;
+                    continue;
+                }
+                if(block_score[k][j] == block_score[i][j]){
+                    aims = k;
+                    break;
+                }
+                break;
+            }
+            if(aims == -1) continue;
+            block_score[aims][j] += block_score[i][j];
+            block_score[i][j] = 0;
+            show_move_animate(i,j,aims,j);
+        }
+    }
+    setTimeout("updateBoardView()",200);
     return true;
 }
+
 var move_down = function(){
-    alert("move down");
+    if(can_move_down() == false){
+        return false;
+    }
+    for(var j = 0;j < 4;j++){
+        for(var i = 2;i >= 0;i--){
+            if(block_score[i][j] == 0) continue;
+            var aims = -1;
+            for(var k = i+1;k < 4;k++){
+                if(block_score[k][j] == 0){
+                    aims = k;
+                    continue;
+                }
+                if(block_score[k][j] == block_score[i][j]){
+                    aims = k;
+                    break;
+                }
+                break;
+            }
+            if(aims == -1) continue;
+            block_score[aims][j] += block_score[i][j];
+            block_score[i][j] = 0;
+            show_move_animate(i,j,aims,j);
+        }
+    }
+    setTimeout("updateBoardView()",200);
     return true;
 }
