@@ -171,6 +171,8 @@ var move_left = function(){
         }
     }
     setTimeout("updateBoardView()",200);
+    setTimeout("get_random()",200);
+    setTimeout("updateBoardView()",200);
     return true;
 }
 
@@ -198,6 +200,8 @@ var move_right = function(){
             show_move_animate(i,j,i,aims);
         }
     }
+    setTimeout("updateBoardView()",200);
+    setTimeout("get_random()",200);
     setTimeout("updateBoardView()",200);
     return true;
 }
@@ -228,6 +232,8 @@ var move_up = function(){
         }
     }
     setTimeout("updateBoardView()",200);
+    setTimeout("get_random()",200);
+    setTimeout("updateBoardView()",200);
     return true;
 }
 
@@ -256,6 +262,8 @@ var move_down = function(){
             show_move_animate(i,j,aims,j);
         }
     }
+    setTimeout("updateBoardView()",200);
+    setTimeout("get_random()",200);
     setTimeout("updateBoardView()",200);
     return true;
 }

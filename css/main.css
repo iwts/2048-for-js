@@ -44,11 +44,11 @@ a{
 .block-128-color{
 	background: #edcf72;
 }
-// 开始有光晕
+/*开始有光晕*/
 .block-256-color{
 	background: #edcc61;
 }
-// 网上xjb找的颜色
+/*网上xjb找的颜色*/
 .block-512-color{
 	background: #9c0;
 }
