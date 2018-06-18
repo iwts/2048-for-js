@@ -18,6 +18,7 @@
 
 # 在哪里玩-Web版
 &#160; &#160; &#160; &#160; 我将提供一个网址，随时挑战^_^
+[game 2048](https://iwts.github.io/2048-for-js/index.html)
 
 # 在哪里玩-Android APP版
 
