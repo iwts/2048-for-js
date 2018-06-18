@@ -151,15 +151,34 @@ var move_left = function(){
     if(can_move_left() == false) return false;
     for(var i = 0;i < 4;i++){
         for(var j = 1;j < 4;j++){
+            /*
+                flag的用法，如果有这样的情况：
+                2240
+                那么一般情况下左移后应该是
+                4400
+                如果没有flag，k的临界条件永远是最左(右/上/下)那么会出现这样：
+                8000
+                因为最左边的先走，出现：
+                4040
+                然后第三个方块走的时候由于临界是最左，则会自动合成出现8000的情况
+                而flag就是避免这个情况，在“注释1的位置”，当合成方块之后就设定flag值
+                防止移动的时候对刚生成的方块进行匹配，从而杜绝这种问题。
+                本质上是不往新生成的方块位置移动，例：
+                4040
+                那么flag就从刚开始的-1更新为1，也就是说，无论后面的方块时多少只能移动到
+                第2块
+            */
+            var flag = -1;
             if(block_score[i][j] == 0) continue;
             var aims = -1;
-            for(var k = j-1;k >= 0;k--){
+            for(var k = j-1;k > flag;k--){
                 if(block_score[i][k] == 0){
                     aims = k;
                     continue;
                 }
                 if(block_score[i][k] == block_score[i][j]){
                     aims = k;
+                    flag = k;
                     break;
                 }
                 break;
@@ -180,15 +199,17 @@ var move_right = function(){
     for(var i = 0;i < 4;i++){
         // 不同方向判定顺序应该不同，这样保证逻辑正确
         for(var j = 2;j >= 0;j--){
+            var flag = 4;
             if(block_score[i][j] == 0) continue;
             var aims = -1;
-            for(var k = j+1;k <= 3;k++){
+            for(var k = j+1;k < flag;k++){
                 if(block_score[i][k] == 0){
                     aims = k;
                     continue;
                 }
                 if(block_score[i][k] == block_score[i][j]){
                     aims = k;
+                    flag = k;
                     break;
                 }
                 break;
@@ -210,15 +231,17 @@ var move_up = function(){
     }
     for(var j = 0;j < 4;j++){
         for(var i = 1;i < 4;i++){
+            var flag = -1;
             if(block_score[i][j] == 0) continue;
             var aims = -1;
-            for(var k = i-1;k >= 0;k--){
+            for(var k = i-1;k > flag;k--){
                 if(block_score[k][j] == 0){
                     aims = k;
                     continue;
                 }
                 if(block_score[k][j] == block_score[i][j]){
                     aims = k;
+                    flag = k;
                     break;
                 }
                 break;
@@ -240,15 +263,17 @@ var move_down = function(){
     }
     for(var j = 0;j < 4;j++){
         for(var i = 2;i >= 0;i--){
+            var flag = 4;
             if(block_score[i][j] == 0) continue;
             var aims = -1;
-            for(var k = i+1;k < 4;k++){
+            for(var k = i+1;k < flag;k++){
                 if(block_score[k][j] == 0){
                     aims = k;
                     continue;
                 }
                 if(block_score[k][j] == block_score[i][j]){
                     aims = k;
+                    flag = k;
                     break;
                 }
                 break;
