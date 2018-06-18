@@ -8,10 +8,22 @@
 	<script type="text/javascript" src="./js/main.js"></script>
 	<script type="text/javascript" src="./js/animate.js"></script>
 </head>
-<body>
-	<div class="outer bg-color">
+<body class="bg-color">
+	<div class="outer">
 		<div class="inner content">
-			<a id="begin">begin!</a>
+			<div class="title">
+				<p>2048</p>
+				<span>by iwts</span>
+			</div>
+			<div class="score-div">
+				<p>SCORE</p>
+				<span id="score">0</span>
+			</div>
+			<div class="score-div best-div">
+				<p>BEST</p>
+				<span id="best">0</span>
+			</div>
+			<a id="begin">begin</a>
 			<div class="inner-bg-color map">
 				<div class="con-block block-0-color" id="b-0-0"></div>
 				<div class="con-block block-0-color" id="b-0-1"></div>
@@ -32,6 +44,10 @@
 				<div class="con-block block-0-color" id="b-3-1"></div>
 				<div class="con-block block-0-color" id="b-3-2"></div>
 				<div class="con-block block-0-color" id="b-3-3"></div>
+			</div>
+			<div class="cover">
+				<p>Game over!</p>
+				<a href="">Try again</a>
 			</div>
 		</div>
 	</div>
